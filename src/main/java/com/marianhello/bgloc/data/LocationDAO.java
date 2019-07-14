@@ -9,6 +9,7 @@ public interface LocationDAO {
     BackgroundLocation getFirstUnpostedLocation();
     BackgroundLocation getNextUnpostedLocation(long fromId);
     long getUnpostedLocationsCount();
+    long getLocationsCount();
     long getLocationsForSyncCount(long millisSinceLastBatch);
     long persistLocation(BackgroundLocation location);
     long persistLocation(BackgroundLocation location, int maxRows);
@@ -18,4 +19,5 @@ public interface LocationDAO {
     BackgroundLocation deleteFirstUnpostedLocation();
     int deleteAllLocations();
     int deleteUnpostedLocations();
+
 }

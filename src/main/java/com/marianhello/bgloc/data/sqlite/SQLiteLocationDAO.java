@@ -171,6 +171,12 @@ public class SQLiteLocationDAO implements LocationDAO {
     return location;
   }
 
+
+  public long getLocationsCount() {
+    return DatabaseUtils.queryNumEntries(db, LocationEntry.TABLE_NAME, null, null);
+
+  }
+
   public long getUnpostedLocationsCount() {
     String whereClause = SQLiteLocationContract.LocationEntry.COLUMN_NAME_STATUS + " = ?";
     String[] whereArgs = { String.valueOf(BackgroundLocation.POST_PENDING) };

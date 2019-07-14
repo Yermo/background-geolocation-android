@@ -108,7 +108,7 @@ public class ContentProviderLocationDAO implements LocationDAO {
 
     }
 
-    public int getLocationsCount() {
+    public long getLocationsCount() {
         Cursor cursor = mResolver.query(
                 mContentUri,
                 null,
@@ -384,4 +384,6 @@ public class ContentProviderLocationDAO implements LocationDAO {
 
         return mResolver.update(mContentUri, values, whereClause, whereArgs);
     }
+
+
 }

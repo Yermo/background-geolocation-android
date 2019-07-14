@@ -102,8 +102,11 @@ public class BackgroundGeolocationFacade {
                 case LocationServiceImpl.MSG_ON_LOCATION: {
                     logger.debug("Received MSG_ON_LOCATION");
                     bundle.setClassLoader(LocationServiceImpl.class.getClassLoader());
+                    logger.debug("after setClassLoader");
                     BackgroundLocation location = (BackgroundLocation) bundle.getParcelable("payload");
+                    logger.debug("after getParcelable");
                     mDelegate.onLocationChanged(location);
+                    logger.debug("after onLocationChanged");
                     return;
                 }
 
@@ -277,6 +280,11 @@ public class BackgroundGeolocationFacade {
         return dao.getValidLocations();
     }
 
+    public long getNumLocations() {
+        LocationDAO dao = DAOFactory.createLocationDAO(getContext());
+        return dao.getLocationsCount();
+    }
+
     public BackgroundLocation getStationaryLocation() {
         return mStationaryLocation;
     }
@@ -349,6 +357,8 @@ public class BackgroundGeolocationFacade {
 
     public synchronized Config getConfig() {
         if (mConfig != null) {
+
+            logger.debug("getConfig mConfig is: {}", mConfig.toString());
             return mConfig;
         }
 
@@ -377,11 +387,13 @@ public class BackgroundGeolocationFacade {
     }
 
     public Collection<LogEntry> getLogEntries(int limit) {
+        logger.debug("getting {} log entries", limit );
         DBLogReader logReader = new DBLogReader();
         return logReader.getEntries(limit, 0, Level.DEBUG);
     }
 
     public Collection<LogEntry> getLogEntries(int limit, int offset, String minLevel) {
+        logger.debug("getting {} log entries from offset {}", limit, offset );
         DBLogReader logReader = new DBLogReader();
         return logReader.getEntries(limit, offset, Level.valueOf(minLevel));
     }
