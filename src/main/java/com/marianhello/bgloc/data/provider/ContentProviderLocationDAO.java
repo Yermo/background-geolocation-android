@@ -17,6 +17,7 @@ import com.marianhello.logging.LoggerManager;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.lang.System;
 
 import ru.andremoniy.sqlbuilder.SqlExpression;
 import ru.andremoniy.sqlbuilder.SqlSelectStatement;
@@ -46,6 +47,12 @@ public class ContentProviderLocationDAO implements LocationDAO {
         Collection<BackgroundLocation> locations = new ArrayList<BackgroundLocation>();
         Cursor cursor = null;
 
+        long timeStart = 0;
+        long timeEnd = 0;
+        long timeInterval = 0;
+
+        timeStart = System.currentTimeMillis();
+
         try {
             cursor = mResolver.query(
                     mContentUri,
@@ -62,6 +69,10 @@ public class ContentProviderLocationDAO implements LocationDAO {
                 cursor.close();
             }
         }
+
+        timeEnd = System.currentTimeMillis();
+
+        logger.debug( "getLocations(): milliseconds: {}", timeEnd - timeStart );
 
         return locations;
     }

@@ -100,13 +100,9 @@ public class BackgroundGeolocationFacade {
 
             switch (action) {
                 case LocationServiceImpl.MSG_ON_LOCATION: {
-                    logger.debug("Received MSG_ON_LOCATION");
                     bundle.setClassLoader(LocationServiceImpl.class.getClassLoader());
-                    logger.debug("after setClassLoader");
                     BackgroundLocation location = (BackgroundLocation) bundle.getParcelable("payload");
-                    logger.debug("after getParcelable");
                     mDelegate.onLocationChanged(location);
-                    logger.debug("after onLocationChanged");
                     return;
                 }
 

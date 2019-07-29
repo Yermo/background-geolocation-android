@@ -503,7 +503,6 @@ public class LocationServiceImpl extends Service implements ProviderDelegate, Lo
 
     @Override
     public void onLocation(BackgroundLocation location) {
-        logger.debug("New location {}", location.toString());
 
         location = transformLocation(location);
         if (location == null) {
